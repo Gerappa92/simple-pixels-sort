@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sort Pixels</title>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="pixels-array-settings">
+        <h6>Size:</h6>
+        <div>
+          <label for="x">x:</label>
+          <input type="number" maxlength="3" id="x" value="10" />
+        </div>
+        <div>
+          <label for="y">y:</label>
+          <input type="number" maxlength="3" id="y" value="10" />
+        </div>
+      </div>
+      <div id="pixels-array">
+        <canvas id="pixels-canvas" width="1000" height="1000"> </canvas>
+      </div>
+      <div id="actions">
+        <select id="sort-select">
+          <option value="bubble">Bubble Sort</option>
+          <option value="selection">Selection Sort</option>
+          <option value="input-red">Input red</option>
+        </select>
+        <select id="color-select">
+          <option value="r">red</option>
+          <option value="g">green</option>
+          <option value="b">blue</option>
+          <option value="avg">average</option>
+        </select>
+        <button type="button" onclick="sort()">Sort!</button>
+      </div>
+    </div>
+  </body>
+</html>
