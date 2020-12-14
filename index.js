@@ -5,7 +5,31 @@ window.addEventListener("load", () => loadPixelsCanvas());
 
 window.addEventListener("load", () => setListeners());
 
+let loaderInterval;
+
+function loaderToggle(on){
+    const sortBtn = document.getElementById("sort-btn");
+
+    const loader = document.getElementById("loader");
+    loader.innerText = "Sorting";
+    if(on){
+        sortBtn.disabled = true;
+        loaderInterval = setInterval(() => {
+            loader.innerHTML = loader.innerText.length < 10 ? loader.innerText + "." : "Sorting";
+        }, 1000);
+    }
+    else{
+        sortBtn.disabled = false;
+        loader.innerText = "Done!"
+        clearInterval(loaderInterval);
+    }
+}
+
 function setListeners(){
+
+    const loader = document.getElementById("loader");
+    loader.innerText = helloworld;
+
     const inputX = document.getElementById("x");
     const inputY = document.getElementById("y");
     inputX.addEventListener("input", event => inputArrayValueChanged(event));
@@ -52,6 +76,8 @@ const loadPixelsCanvas = () =>{
 }
 
 const sort = () =>{
+    loaderToggle(true);
+
     const sortSelect = document.getElementById("sort-select");
     const sortType = sortSelect.value;
 
@@ -109,6 +135,9 @@ async function bubbleRecursiveSort(imageData, color){
         await sleep(1);
         bubbleRecursiveSort(imageData, color);
     }
+    else{
+        loaderToggle(false);
+    }
 }
 
 async function selectionSort(imageData, color){
@@ -135,6 +164,8 @@ async function selectionSort(imageData, color){
             pixelsContext.putImageData(imageData, 0, 0);
         }
     }
+
+    loaderToggle(false);
 }
 
 function replacePixles(pixelsArray, i, j){
